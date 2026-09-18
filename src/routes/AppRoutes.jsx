@@ -7,6 +7,7 @@ import CyberSecurity from "../pages/CyberSecurity/CyberSecurity";
 import ChallengesPage from "../pages/Challenges/ChallengesPage";
 import RegisterationPage from "../pages/Auth/RegisterationPage";
 import LoginPage from "../pages/Auth/LoginPage";
+import NotFoundPage from "../pages/NotFound/NotFoundPage";
 import MainLayout from "../components/layout/MainLayout.jsx";
 
 const AppRoutes = () => {
@@ -22,7 +23,7 @@ const AppRoutes = () => {
         <Route path="challenges" element={<ChallengesPage />} />
         <Route path="register" element={<RegisterationPage />} />
         <Route path="login" element={<LoginPage />} />
-
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
       </Routes>
     </>
