@@ -1,11 +1,7 @@
-import React from "react";
+import ChallengesPage from "../Challenges/ChallengesPage";
 
 const ProjectsPage = () => {
-  return (
-    <>
-      <h3>Projects Page</h3>
-    </>
-  );
+  return <ChallengesPage />;
 };
 
 export default ProjectsPage;

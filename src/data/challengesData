@@ -1,0 +1,15 @@
+import redisImg from "../assets/images/redis.png";
+import terminalImg from "../assets/images/terminal.png";
+import chainImg from "../assets/images/chain.png";
+
+const description =
+  "Master systems programming by building a POSIX-compliant shell. Implement command execution, piping, redirection, and environment variable management from scratch.";
+
+export const challenges = [
+  { id: 1, title: "Build Your Own Shell", description, difficulty: "Easy", phases: 12, hours: 40, progress: 60, image: redisImg },
+  { id: 2, title: "Build Your Own Shell", description, difficulty: "Hard", phases: 12, hours: 40, progress: 60, image: terminalImg },
+  { id: 3, title: "Build Your Own Shell", description, difficulty: "Medium", phases: 12, hours: 40, progress: 60, image: chainImg },
+  { id: 4, title: "Build Your Own Shell", description, difficulty: "Medium", phases: 12, hours: 40, progress: 60, image: redisImg },
+{ id: 5, title: "Build Your Own Shell", description, difficulty: "Hard", phases: 12, hours: 40, progress: 60, image: terminalImg },
+{ id: 6, title: "Build Your Own Shell", description, difficulty: "Easy", phases: 12, hours: 40, progress: 60, image: chainImg },
+];
