@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Clock, Layers } from "lucide-react";
 
 const badgeStyles = {
@@ -6,7 +7,7 @@ const badgeStyles = {
   Hard: "bg-red-500/10 text-red-400",
 };
 
-const ChallengeCard = ({ title, description, difficulty, phases, hours, progress, image }) => {
+const ChallengeCard = ({ id, title, description, difficulty, phases, hours, progress, image }) => {
   return (
     <article className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-[#0f0f10] p-3">
       <img
@@ -37,19 +38,22 @@ const ChallengeCard = ({ title, description, difficulty, phases, hours, progress
       <div>
         <div className="flex justify-between text-xs text-gray-400">
           <span>Progress</span>
-          <span className="font-semibold text-[#FF8C00]">{progress}%</span>
+          <span className="font-semibold text-[#F78400]">{progress}%</span>
         </div>
         <div className="mt-1.5 h-1 rounded-full bg-white/10">
           <div
-            className="h-full rounded-full bg-[#FF8C00]"
+            className="h-full rounded-full bg-[#F78400]"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
-      <button className="w-full rounded-lg border-0! bg-[#FF8C00]! py-2 text-sm font-semibold text-white!">
-        Start Challenge
-      </button>
+      <Link
+        to={`/challenges/${id}`}
+         className="block w-full rounded-lg bg-[#F78400]! py-2 text-center text-sm font-semibold text-white! no-underline!"
+      >
+         Start Challenge
+        </Link>
     </article>
   );
 };
