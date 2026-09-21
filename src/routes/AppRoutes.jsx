@@ -5,6 +5,7 @@ import SeminarsPage from "../pages/Seminars/SeminarsPage";
 import ProblemSolvingPage from "../pages/ProblemSolving/ProblemSolvingPage";
 import CyberSecurity from "../pages/CyberSecurity/CyberSecurity";
 import ChallengesPage from "../pages/Challenges/ChallengesPage";
+import ChallengesDetailsPage from "../pages/Challenges/ChallengesDetails";
 import RegisterationPage from "../pages/Auth/RegisterationPage";
 import LoginPage from "../pages/Auth/LoginPage";
 import NotFoundPage from "../pages/NotFound/NotFoundPage";
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="problem-solving" element={<ProblemSolvingPage />} />
         <Route path="cyberSecurity" element={<CyberSecurity />} />
         <Route path="challenges" element={<ChallengesPage />} />
+        <Route path="challenges/:id" element={<ChallengesDetailsPage />} />
         <Route path="register" element={<RegisterationPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />

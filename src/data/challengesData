@@ -1,0 +1,36 @@
+import redisImg from "../assets/images/redis.png";
+import terminalImg from "../assets/images/terminal.png";
+import chainImg from "../assets/images/chain.png";
+
+const description =
+  "Master systems programming by building a POSIX-compliant shell. Implement command execution, piping, redirection, and environment variable management from scratch.";
+const sampleSkills = ["TCP Networking", "Systems Architecture", "Concurrency", "Memory Mgmt", "RESP Serialization"];
+const sampleAttempts = [
+  { date: "Oct 24, 14:20", status: "Failed", score: "42/100" },
+  { date: "Oct 23, 09:12", status: "Failed", score: "12/100" },
+  { date: "Oct 21, 18:45", status: "Passed", score: "100/100" },
+];
+
+const samplePhases = [
+  { id: 1, title: "Resp Protocol Basics", status: "done" },
+  { id: 2, title: "Strings", status: "done" },
+  { id: 3, title: "Lists", status: "done" },
+  { id: 4, title: "Hashes", status: "done" },
+  { id: 5, title: "Sets", status: "done" },
+  { id: 6, title: "Sorted Sets", status: "done" },
+  { id: 7, title: "Persistence", status: "done" },
+  { id: 8, title: "Master/Slave Replication", status: "current" },
+  { id: 9, title: "Pub/Sub", status: "locked" },
+  { id: 10, title: "Transactions", status: "locked" },
+  { id: 11, title: "Streams", status: "locked" },
+  { id: 12, title: "Cluster Mode", status: "locked" },
+];
+
+export const challenges = [
+  { id: 1, title: "Build Your Own Shell", description, difficulty: "Easy", phases: 12, hours: 40, progress: 60, image: redisImg, phasesList: samplePhases, builders: 350, timeline: "4-6 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+  { id: 2, title: "Build Your Own Shell", description, difficulty: "Hard", phases: 12, hours: 40, progress: 60, image: terminalImg, phasesList: samplePhases, builders: 210, timeline: "6-8 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+  { id: 3, title: "Build Your Own Shell", description, difficulty: "Medium", phases: 12, hours: 40, progress: 60, image: chainImg, phasesList: samplePhases, builders: 280, timeline: "5-7 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+  { id: 4, title: "Build Your Own Shell", description, difficulty: "Medium", phases: 12, hours: 40, progress: 60, image: redisImg, phasesList: samplePhases, builders: 190, timeline: "5-7 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+  { id: 5, title: "Build Your Own Shell", description, difficulty: "Hard", phases: 12, hours: 40, progress: 60, image: terminalImg, phasesList: samplePhases, builders: 150, timeline: "6-8 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+  { id: 6, title: "Build Your Own Shell", description, difficulty: "Easy", phases: 12, hours: 40, progress: 60, image: chainImg, phasesList: samplePhases, builders: 400, timeline: "4-6 Weeks", skills: sampleSkills, attempts: sampleAttempts },
+];
