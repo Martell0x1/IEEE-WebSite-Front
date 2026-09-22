@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Lock } from "lucide-react";
 
 const statusStyles = {
@@ -24,11 +25,30 @@ const statusStyles = {
 };
 
 const WeekCard = ({ week }) => {
+  const navigate = useNavigate();
   const styles = statusStyles[week.status];
   const percent = week.problems
     ? Math.round((week.solved / week.problems) * 100)
     : 0;
   const Icon = week.Icon;
+
+   const handleStart = () => {
+    const token = localStorage.getItem("token");
+
+    const destination = `/problem-solving/${week.id}`;
+
+    if (!token) {
+      navigate("/login", {
+        state: {
+          from: destination,
+        },
+      });
+
+      return;
+    }
+
+    navigate(destination);
+  };
 
   return (
     <article className="flex flex-col bg-[#111113] border border-white/8 rounded-2xl p-5 sm:p-6">
@@ -80,6 +100,7 @@ const WeekCard = ({ week }) => {
         <button
           type="button"
           className={`w-full py-2.5 rounded-full text-sm font-semibold transition ${styles.button}`}
+          onClick={handleStart}
         >
           {week.status === "completed"
             ? "Review Week"

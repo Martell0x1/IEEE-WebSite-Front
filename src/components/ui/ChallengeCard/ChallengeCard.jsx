@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Clock, Layers } from "lucide-react";
 
 const badgeStyles = {
@@ -7,7 +7,34 @@ const badgeStyles = {
   Hard: "bg-red-500/10 text-red-400",
 };
 
-const ChallengeCard = ({ id, title, description, difficulty, phases, hours, progress, image }) => {
+const ChallengeCard = ({
+  id,
+  title,
+  description,
+  difficulty,
+  phases,
+  hours,
+  progress,
+  image,
+}) => {
+  const navigate = useNavigate();
+
+  const handleStartChallenge = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login", {
+        state: {
+          from: `/challenges/${id}`,
+        },
+      });
+
+      return;
+    }
+
+    navigate(`/challenges/${id}`);
+  };
+
   return (
     <article className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-[#0f0f10] p-3">
       <img
@@ -16,7 +43,9 @@ const ChallengeCard = ({ id, title, description, difficulty, phases, hours, prog
         className="h-36 w-full rounded-xl object-cover"
       />
 
-      <span className={`w-fit rounded-md px-2 py-0.5 text-[10px] font-semibold uppercase ${badgeStyles[difficulty]}`}>
+      <span
+        className={`w-fit rounded-md px-2 py-0.5 text-[10px] font-semibold uppercase ${badgeStyles[difficulty]}`}
+      >
         {difficulty}
       </span>
 
@@ -28,18 +57,24 @@ const ChallengeCard = ({ id, title, description, difficulty, phases, hours, prog
 
       <div className="flex items-center gap-4 text-xs text-gray-400">
         <span className="flex items-center gap-1.5">
-          <Layers size={12} /> {phases} Phases
+          <Layers size={12} />
+          {phases} Phases
         </span>
+
         <span className="flex items-center gap-1.5">
-          <Clock size={12} /> ~{hours} hours
+          <Clock size={12} />
+          ~{hours} hours
         </span>
       </div>
 
       <div>
         <div className="flex justify-between text-xs text-gray-400">
           <span>Progress</span>
-          <span className="font-semibold text-[#F78400]">{progress}%</span>
+          <span className="font-semibold text-[#F78400]">
+            {progress}%
+          </span>
         </div>
+
         <div className="mt-1.5 h-1 rounded-full bg-white/10">
           <div
             className="h-full rounded-full bg-[#F78400]"
@@ -48,12 +83,13 @@ const ChallengeCard = ({ id, title, description, difficulty, phases, hours, prog
         </div>
       </div>
 
-      <Link
-        to={`/challenges/${id}`}
-         className="block w-full rounded-lg bg-[#F78400]! py-2 text-center text-sm font-semibold text-white! no-underline!"
+      <button
+        type="button"
+        onClick={handleStartChallenge}
+        className="block w-full rounded-lg bg-[#F78400]! py-2 text-center text-sm font-semibold text-white!"
       >
-         Start Challenge
-        </Link>
+        Start Challenge
+      </button>
     </article>
   );
 };

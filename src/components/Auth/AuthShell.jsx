@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import backgroundImage from "../../assets/images/background.png";
+import backgroundImage from "../../assets/images/background.webp";
 
 const AuthShell = ({ eyebrow, title, accent, description, quotes, children }) => {
   return (

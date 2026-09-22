@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import ieeeLogo from "../../../assets/images/IEEE-Logo.png";
+import ieeeLogo from "../../../assets/images/IEEE-Logo.webp";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

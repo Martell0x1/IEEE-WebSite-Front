@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Compass, House } from "lucide-react";
-import backgroundImage from "../../assets/images/background.png";
-import ieeeLogo from "../../assets/images/IEEE-Logo.png";
+import backgroundImage from "../../assets/images/background.webp";
+import ieeeLogo from "../../assets/images/IEEE-Logo.webp";
 
 const NotFoundPage = () => {
   return (
@@ -33,8 +33,7 @@ const NotFoundPage = () => {
               ERROR 404
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15] tracking-tight drop-shadow-md">
-              Page not{" "}
-              <span className="text-[#FF8C00]">found.</span>
+              Page not <span className="text-[#FF8C00]">found.</span>
             </h1>
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto">
               This route is not in the IEEE Excom map. Head back home or keep
