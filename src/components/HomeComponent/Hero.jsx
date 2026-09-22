@@ -1,11 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import backgroundImage from "../../assets/images/background.png";
-import heroLogo from "../../assets/images/hero-logo.png";
+import backgroundImage from "../../assets/images/background.webp";
+import heroLogo from "../../assets/images/hero-logo.webp";
 import MobileStatCard from "./MobileStatCard";
 import StatCard from "./StatCard";
-
 import {
   ClipboardList,
   Calendar,
@@ -21,23 +20,20 @@ const Hero = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black/60 pointer-events-none" />
-
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 sm:w-150 h-87.5 sm:h-150 bg-orange-600/20 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
         <motion.div
           className="lg:col-span-5 flex flex-col justify-center space-y-6 sm:space-y-8 text-center lg:text-left"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
           <div className="space-y-3 sm:space-y-4">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15] tracking-tight drop-shadow-md">
-              Build Real Skills <br className="hidden sm:inline" />
-              Through Real <br className="hidden sm:inline" />
+              Build Real Skills <br className="hidden sm:inline" /> Through Real
+              <br className="hidden sm:inline" />
               <span className="text-[#FF8C00]">Projects.</span>
             </h1>
-
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0">
               Learn Software Engineering, Cyber Security, AI, IoT, and more by
               building production-inspired systems from scratch.
@@ -53,6 +49,7 @@ const Hero = () => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
               className="w-full sm:w-auto"
             >
               <Link
@@ -62,10 +59,10 @@ const Hero = () => {
                 Start Building
               </Link>
             </motion.button>
-
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
               className="w-full sm:w-auto"
             >
               <Link
@@ -77,23 +74,29 @@ const Hero = () => {
             </motion.button>
           </div>
         </motion.div>
+
         <motion.div
           className="lg:col-span-7 relative min-h-105 sm:min-h-137.5 flex flex-col items-center justify-center"
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
           <motion.div
             animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
             className="relative z-10 w-full max-w-[320px] sm:max-w-110 flex justify-center"
           >
             <img
               src={heroLogo}
               alt="IEEE Glowing Centerpiece"
+              width="550"
+              height="427"
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-auto object-contain drop-shadow-[0_0_35px_rgba(255,140,0,0.4)] rounded-2xl"
             />
           </motion.div>
+
           <div className="hidden sm:block">
             <StatCard
               title="PROJECTS"
@@ -200,5 +203,4 @@ const Hero = () => {
     </section>
   );
 };
-
 export default Hero;

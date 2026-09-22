@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { Lock, Mail } from "lucide-react";
+
 import AuthShell from "../../components/Auth/AuthShell";
 import AuthField from "../../components/Auth/AuthField";
-import ieeeLogo from "../../assets/images/IEEE-Logo.png";
+import ieeeLogo from "../../assets/images/IEEE-Logo.webp";
 
 const loginSchema = z.object({
   email: z.email("Enter a valid email"),
@@ -15,9 +16,13 @@ const loginSchema = z.object({
 });
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -28,7 +33,47 @@ const LoginPage = () => {
     },
   });
 
-  const onSubmit = () => {};
+   const onSubmit = async (data) => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        },
+      );
+ const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Login failed");
+      }
+
+      const token = result.token;
+
+      if (!token) {
+        throw new Error("No authentication token was returned.");
+      }
+
+      localStorage.setItem("token", token);
+
+      const redirectTo = location.state?.from || "/";
+
+      navigate(redirectTo, {
+        replace: true,
+      });
+    } catch (error) {
+      setError("root", {
+        type: "server",
+        message: error.message || "Something went wrong. Please try again.",
+      });
+    }
+  };
 
   return (
     <AuthShell
@@ -57,6 +102,12 @@ const LoginPage = () => {
             </h2>
           </div>
         </div>
+        
+        {errors.root?.message && (
+          <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            {errors.root.message}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           <AuthField

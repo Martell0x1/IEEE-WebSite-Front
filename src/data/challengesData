@@ -1,6 +1,6 @@
-import redisImg from "../assets/images/redis.png";
-import terminalImg from "../assets/images/terminal.png";
-import chainImg from "../assets/images/chain.png";
+import redisImg from "../assets/images/redis.webp";
+import terminalImg from "../assets/images/terminal.webp";
+import chainImg from "../assets/images/chain.webp";
 
 const description =
   "Master systems programming by building a POSIX-compliant shell. Implement command execution, piping, redirection, and environment variable management from scratch.";

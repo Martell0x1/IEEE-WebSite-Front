@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { Lock, Mail, User } from "lucide-react";
+
 import AuthShell from "../../components/Auth/AuthShell";
 import AuthField from "../../components/Auth/AuthField";
-import ieeeLogo from "../../assets/images/IEEE-Logo.png";
+import ieeeLogo from "../../assets/images/IEEE-Logo.webp";
 
 const registerSchema = z
   .object({
@@ -24,6 +25,8 @@ const registerSchema = z
   });
 
 const RegisterationPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -39,7 +42,51 @@ const RegisterationPage = () => {
     },
   });
 
-  const onSubmit = () => {};
+   const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/signup", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          name: data.fullName,
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Registration failed");
+      }
+
+      const token = result.token;
+
+      if (!token) {
+        throw new Error("No authentication token was returned.");
+      }
+
+      // Save authentication token
+      localStorage.setItem("token", token);
+
+      // Return to the page the user originally wanted to access
+      const redirectTo = location.state?.from || "/";
+
+      navigate(redirectTo, {
+        replace: true,
+      });
+    } catch (error) {
+      setError("root", {
+        type: "server",
+        message:
+          error.message || "Something went wrong. Please try again.",
+      });
+    }
+  };
 
   return (
     <AuthShell
@@ -69,7 +116,11 @@ const RegisterationPage = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4"
+          noValidate
+        >
           <AuthField
             id="register-name"
             label="Full name"
@@ -120,7 +171,10 @@ const RegisterationPage = () => {
               />
               <span>
                 I agree to the{" "}
-                <Link to="/terms" className="text-[#FF8C00] hover:text-orange-400">
+                <Link
+                  to="/terms"
+                  className="text-[#FF8C00] hover:text-orange-400"
+                >
                   Terms of Service
                 </Link>{" "}
                 and{" "}
