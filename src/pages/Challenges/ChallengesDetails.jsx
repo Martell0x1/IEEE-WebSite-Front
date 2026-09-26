@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Check, Lock, Play } from "lucide-react";
+import { ArrowLeft, Check, Lock, Play, X } from "lucide-react";
 import { challenges } from "../../data/challengesData";
 
 const ChallengesDetails = () => {
   const { id } = useParams();
   const challenge = challenges.find((item) => item.id === Number(id));
   const [showAllPhases, setShowAllPhases] = useState(false);
-
+  const [lockedPhase, setLockedPhase] = useState(null);
   if (!challenge) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
@@ -105,23 +105,34 @@ const ChallengesDetails = () => {
               </span>
             )}
             {phase.status === "locked" && (
-              <Lock size={16} className="shrink-0 text-gray-600" />
+            <button onClick={() => setLockedPhase(phase)} className="shrink-0">
+             <Lock size={16} className="text-gray-600" />
+             </button>
             )}
 
             <span className={`text-sm ${phase.status === "locked" ? "text-gray-600" : "text-gray-400"}`}>
               Phase {phase.id}
             </span>
-            <span
-              className={`text-sm font-semibold ${
-                phase.status === "locked"
-                  ? "text-gray-500"
-                  : phase.status === "current"
-                  ? "text-[#F78400]"
-                  : "text-white"
-              }`}
-            >
-              {phase.title}
-            </span>
+                <div className="ml-auto">
+              {phase.status === "done" && (
+                <button className="rounded-lg! border! border-white/15! bg-transparent! px-4! py-1.5! text-xs font-semibold text-gray-300!">
+                  Review
+                </button>
+              )}
+              {phase.status === "current" && (
+                <button className="rounded-lg! border-0! bg-[#F78400]! px-5! py-1.5! text-xs font-semibold text-white!">
+                  Continue
+                </button>
+              )}
+              {phase.status === "locked" && (
+                <button
+                  onClick={() => setLockedPhase(phase)}
+                  className="text-xs text-gray-600!"
+                >
+                  Locked
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -147,7 +158,7 @@ const ChallengesDetails = () => {
           </span>
         ))}
       </div>
-            <h2 className="mt-10 text-xl font-bold text-white">Recent Attempts</h2>
+                  <h2 className="mt-10 text-xl font-bold text-white">Recent Attempts</h2>
 
       <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-[#0f0f10]">
         <div className="grid grid-cols-3 px-4 py-2 text-[11px] uppercase text-gray-500">
@@ -169,6 +180,44 @@ const ChallengesDetails = () => {
           </div>
         ))}
       </div>
+
+      {lockedPhase && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#0f0f10] p-6 text-center">
+            <button
+              onClick={() => setLockedPhase(null)}
+              className="absolute right-4 top-4 text-gray-500"
+            >
+              <X size={16} />
+            </button>
+
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-gray-400">
+              <Lock size={22} />
+            </div>
+
+            <h2 className="mt-4 text-lg font-bold text-white">Previous Steps Incomplete!</h2>
+            <p className="mt-2 text-xs text-gray-400">
+              This phase depends on earlier phases you haven't completed yet. Finish the current phase first to unlock this one.
+            </p>
+
+            <div className="mt-4 flex items-center gap-3 rounded-xl bg-black/40 p-3 text-left">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F78400]">
+                <Play size={13} className="fill-white text-white" />
+              </span>
+              <div>
+                <p className="text-[10px] uppercase text-gray-500">Current Phase</p>
+                <p className="text-sm font-semibold text-[#F78400]">
+                  Phase {currentPhase?.id} — {currentPhase?.title}
+                </p>
+              </div>
+            </div>
+
+            <button className="mt-4 w-full rounded-lg! border-0! bg-[#F78400]! py-2.5! text-sm font-semibold text-white!">
+              View Current Stage
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

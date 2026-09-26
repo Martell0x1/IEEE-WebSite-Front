@@ -10,6 +10,7 @@ const ProblemSolvingDetails = lazy(() => import("../pages/ProblemSolving/Problem
 const CyberSecurity = lazy(() => import("../pages/CyberSecurity/CyberSecurity"),);
 const ChallengesPage = lazy(() => import("../pages/Challenges/ChallengesPage"));
 const ChallengesDetailsPage = lazy(() => import("../pages/Challenges/ChallengesDetails"),);
+const SubmitSolutionPage = lazy(() => import("../pages/Challenges/SubmitSolution"));
 const RegisterationPage = lazy(() => import("../pages/Auth/RegisterationPage"));
 const LoginPage = lazy(() => import("../pages/Auth/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFound/NotFoundPage"));
@@ -28,6 +29,7 @@ const AppRoutes = () => {
             <Route path="cyberSecurity" element={<CyberSecurity />} />
             <Route path="challenges" element={<ChallengesPage />} />
             <Route path="challenges/:id" element={<ChallengesDetailsPage />} />
+            <Route path="challenges/:id/submit" element={<SubmitSolutionPage />} />
             <Route path="register" element={<RegisterationPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
